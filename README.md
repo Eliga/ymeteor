@@ -1,2 +1,2 @@
-# ubuntu
-ubuntu container for YouSlide
+# meteor
+meteor container for YouSlide

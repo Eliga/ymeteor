@@ -1,12 +1,10 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y openssh-server supervisor apt-utils aptitude
+# INSTALL PACKAGES
+RUN  apt-get update && apt-get install -y curl git python make node-gyp
 
-RUN mkdir -p /var/run/sshd
-RUN mkdir -p /root/.ssh
+# INSTALL METEOR
+RUN curl https://install.meteor.com | sh
+RUN meteor update --allow-superuser
 
-COPY keys.pub /root/.ssh/authorized_keys
-COPY sshd.conf /etc/supervisor/conf.d/sshd.conf
-
-EXPOSE 22
-CMD ["/usr/bin/supervisord", "-n"]
+CMD [ "meteor", "--version", "--allow-superuser" ]
